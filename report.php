@@ -35,7 +35,7 @@ mysqli_free_result($result);
   sd.lats_writing,
   sem.semester_name,
   sem.semester_year
- from Semester_data sd
+ from Semester_Data sd
   Natural Join Semesters sem
   where student_id=? order by sem.semester ASC");
   $query->bind_param('s', $student_id);
