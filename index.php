@@ -39,7 +39,7 @@ include_once("cas-go.php");
                 echo "Access Denied.";
                 return;
             } else {
-                if ($net_id == "blm39" || $net_id =="hatuhart" || $net_id =="kjh27") {
+                if ($net_id == "blm39" || $net_id =="hatuhart" || $net_id =="kjh27" || $net_id =="sandyh2") {
                 } else {
                     echo "Access Denied.";
                     return;
