@@ -90,6 +90,8 @@ mysqli_free_result($result);
         $query->bind_param('ss', $student_id, $row2['semester']);
         $query->execute();
         $result2 = $query->get_result();
+        $numRows = $result2->num_rows;
+        if ($numRows==0) { echo "<div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div>"; }
         while ($row3 = $result2->fetch_assoc()) {
           echo "<div class='value'>".$row3['grades_citizenship_percentage']."</div>";
           echo "<div class='value'>".$row3['grades_proficiency_percentage']."</div>";
