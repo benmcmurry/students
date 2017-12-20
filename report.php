@@ -2,6 +2,7 @@
 include_once("../../connectFiles/connect_e.php");
 include_once("cas-go.php");
 $student_id = $_POST['student_id'];
+// $student_id = $_GET['student_id'];
 $student_id = str_replace(' ', '', $student_id);
 $student_id = preg_replace('/\s+/', '', $student_id);
 
@@ -36,42 +37,47 @@ mysqli_free_result($result);
   sem.semester_name,
   sem.semester_year
  from Semester_Data sd
-  Natural Join Semesters sem
-  where student_id=? order by sem.semester ASC");
+ inner join Semesters sem on sd.semester = sem.semester
+   where sd.student_id=? order by sem.semester ASC");
   $query->bind_param('s', $student_id);
   $query->execute();
-  $result = $query->get_result();
+  $result2 = $query->get_result();
 
  
 
   ?>
- <div id='data-table'>
-  <div class='column'>
-    <div class='value header'>Semester</div>
-    <div class='value header'>Status</div>
-    <div class='value header'>LATs Combined Average</div>
-    <div class='value header'>LATs Vocabulary</div>
-    <div class='value header'>LATs Listening Score</div>
-    <div class='value header'>LATs Listening Level</div>
-    <div class='value header'>LATs Reading Score</div>
-    <div class='value header'>LATs Reading Level</div> 
-    <div class='value header'>LATs Speaking</div>
-    <div class='value header'>LATs Writing</div>
-    <div class='value header'>Grammar Citizenship</div>
-    <div class='value header'>Grammar Proficiency</div>
-    <div class='value header'>Grammar 5-point Scale</div>
-    <div class='value header'>Listening & Speaking Citizenship</div>
-    <div class='value header'>Listening & Speaking Proficiency</div>
-    <div class='value header'>Listening & Speaking 5-point Scale</div>
-    <div class='value header'>Reading Citizenship</div>
-    <div class='value header'>Reading Proficiency</div>
-    <div class='value header'>Reading 5-point Scale</div>
-    <div class='value header'>Writing Citizenship</div>
-    <div class='value header'>Writing Proficiency</div>
-    <div class='value header'>Writing 5-point Scale</div>
-  </div>
- <?php
-  while ($row2 = $result->fetch_assoc()) {
+    <div id='data-table'>
+
+        <div class='column'>
+            <div class='value header'>Semester</div>
+            <div class='value header'>Status</div>
+            <div class='placeholder'>LATs</div>
+            <div class='value header'>LATs Combined Average</div>
+            <div class='value header'>LATs Vocabulary</div>
+            <div class='value header'>LATs Listening Score</div>
+            <div class='value header'>LATs Listening Level</div>
+            <div class='value header'>LATs Reading Score</div>
+            <div class='value header'>LATs Reading Level</div>
+            <div class='value header'>LATs Speaking</div>
+            <div class='value header'>LATs Writing</div>
+            <div class='placeholder'>Citizenship Grades</div>
+            <div class='value header'>Grammar Citizenship</div>
+            <div class='value header'>Listening & Speaking Citizenship</div>
+            <div class='value header'>Reading Citizenship</div>
+            <div class='value header'>Writing Citizenship</div>
+            <div class='placeholder'>Proficiency Grades</div>
+            <div class='value header'>Grammar Proficiency</div>
+            <div class='value header'>Listening & Speaking Proficiency</div>
+            <div class='value header'>Reading Proficiency</div>
+            <div class='value header'>Writing Proficiency</div>
+            <div class='placeholder'>5-point Scale</div>
+            <div class='value header'>Grammar 5-point Scale</div>
+            <div class='value header'>Listening & Speaking 5-point Scale</div>
+            <div class='value header'>Reading 5-point Scale</div>
+            <div class='value header'>Writing 5-point Scale</div>
+        </div>
+        <?php
+  while ($row2 = $result2->fetch_assoc()) {
     
         echo "<div class='column'>";
         foreach ($row2 as $key => $value) {
@@ -80,8 +86,8 @@ mysqli_free_result($result);
           }
           if ($key == "semester"){
             echo "<div class='value'>".$row2['semester_name']." ".$row2['semester_year']."</div>";
-          } elseif ($key !== 'semester_name' && $key !=="semester_year"){
-            // $value = number_format((float)$value, 2, '.', '');
+          } elseif($key !== 'semester_name' && $key !=="semester_year"){
+            if ($key == 'lats_comb_av'){echo "<div class='placeholder'>&nbsp;</div>";}
           echo "<div class='value'>$value</div>";
           }
         }
@@ -89,16 +95,30 @@ mysqli_free_result($result);
         $query = $elc_db->prepare("select * from Student_Enrollments se where se.student_id=? and se.semester =? order by se.course_id asc");
         $query->bind_param('ss', $student_id, $row2['semester']);
         $query->execute();
-        $result2 = $query->get_result();
-        $numRows = $result2->num_rows;
-        if ($numRows==0) { echo "<div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div>"; }
-        while ($row3 = $result2->fetch_assoc()) {
-          echo "<div class='value'>".$row3['grades_citizenship_percentage']."</div>";
-          echo "<div class='value'>".$row3['grades_proficiency_percentage']."</div>";
-          echo "<div class='value'>".$row3['five_point_scale']."</div>";
+        $result3 = $query->get_result();
+        $numRows = $result3->num_rows;
+        if ($numRows==0) { echo "<div class='placeholder'>&nbsp;</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='placeholder'>&nbsp;</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='placeholder'>&nbsp;</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div><div class='value'>-</div>"; }
+        else
+        {echo "<div class='placeholder'>&nbsp;</div>";
+        while ($citizenshipGrades = $result3->fetch_assoc()) {
+          echo "<div class='value'>".$citizenshipGrades['grades_citizenship_percentage']."</div>";
           
         }
-
+        $result3->data_seek(0);
+        echo "<div class='placeholder'>&nbsp;</div>";
+        while ($proficiencyGrades = $result3->fetch_assoc()) {
+          
+          echo "<div class='value'>".$proficiencyGrades['grades_proficiency_percentage']."</div>";
+       
+          
+        }
+        $result3->data_seek(0);
+        echo "<div class='placeholder'>&nbsp;</div>";
+        while ($fivePointScale = $result3->fetch_assoc()) {
+          echo "<div class='value'>".$fivePointScale['five_point_scale']."</div>";
+          
+        }
+      }
         echo "</div>";
 
         

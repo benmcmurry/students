@@ -7,11 +7,11 @@ $(document).ready(function() {
     $("span#year").text(n);
 
     $("#student_id").keypress(function(e) {
-    if(e.which == 13) {
-      e.preventDefault();
-        getReport();
-    }
-});
+        if (e.which == 13) {
+            e.preventDefault();
+            getReport();
+        }
+    });
     $("a#get").on("click", function() {
         getReport();
     }); //event listener for report generation
@@ -22,14 +22,14 @@ $(document).ready(function() {
 
 
 function getReport(student_id) {
-  student_id= $("#student_id").text();
-  console.log("b"+student_id+"e");
-  $.ajax({
-       type: "POST",
-       url: "report.php",
-       data: { student_id: student_id }
-   }).done(function(phpfile) {
-      $("#student_data").html(phpfile);
-   });
+    student_id = $("#student_id").text();
+    console.log("b" + student_id + "e");
+    $.ajax({
+        type: "POST",
+        url: "report.php",
+        data: { student_id: student_id }
+    }).done(function(phpfile) {
+        $("#student_data").html(phpfile);
+    });
 
 }

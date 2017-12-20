@@ -94,7 +94,7 @@ a#get:active {
 #data-table {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
@@ -105,6 +105,7 @@ a#get:active {
     display: flex;
     flex-direction: column;
     margin: 0px;
+    justify-content: stretch;
 }
 
 #data-table .column:first-child {
@@ -127,6 +128,35 @@ a#get:active {
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
+}
+
+#data-table .column .placeholder {
+    flex: 1;
+    /* outline: 1px solid black; */
+    border-bottom: 1px black solid;
+    padding: .3em;
+    /* min-width: 200px;
+    max-width: 250px; */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: left;
+    font-size: 1.3em;
+    background-color: #f4eda2;
+}
+
+#data-table .column .two {
+    flex: 2;
+    height: 9%;
+}
+
+#data-table .column .eight {
+    flex: 8;
+    height: 36%;
+}
+
+#data-table .column .four {
+    flex: 4;
 }
 
 #data-table .column .value:first-child {
