@@ -94,10 +94,11 @@ a#get:active {
 #data-table {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    /* align-items: flex-start; */
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    justify-content: center;
 }
 
 #data-table .column {
@@ -105,7 +106,6 @@ a#get:active {
     display: flex;
     flex-direction: column;
     margin: 0px;
-    justify-content: stretch;
 }
 
 #data-table .column:first-child {
@@ -118,48 +118,37 @@ a#get:active {
 
 #data-table .column .value {
     flex: 1;
-    /* outline: 1px solid black; */
     border-bottom: 1px black solid;
     border-left: 1px black solid;
     padding: .3em;
-    /* min-width: 200px;
-    max-width: 250px; */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 125px;
     text-align: center;
 }
 
 #data-table .column .placeholder {
     flex: 1;
-    /* outline: 1px solid black; */
     border-bottom: 1px black solid;
+    border-left: 1px #f4eda2 solid;
     padding: .3em;
-    /* min-width: 200px;
-    max-width: 250px; */
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    width: 125px;
     text-align: left;
-    font-size: 1.3em;
+    font-size: 1em;
     background-color: #f4eda2;
 }
 
-#data-table .column .two {
-    flex: 2;
-    height: 9%;
+#data-table .column .placeholderHeader {
+    flex: 1;
+    border-bottom: 1px black solid;
+    padding: .3em;
+    width: 200px;
+    text-align: left;
+    font-size: 1em;
+    background-color: #f4eda2;
+    padding-left: 1em;
+    /* white-space: nowrap; */
 }
 
-#data-table .column .eight {
-    flex: 8;
-    height: 36%;
-}
-
-#data-table .column .four {
-    flex: 4;
-}
-
-#data-table .column .value:first-child {
+#data-table .column div:first-child {
     border-top: black solid 1px;
 }
 
@@ -168,8 +157,14 @@ a#get:active {
 }
 
 #data-table .column .header {
+    flex: 1;
+    border-bottom: 1px black solid;
     text-align: right;
     border-left: none;
+    font-size: 1em;
+    padding: .3em;
+    width: 200px;
+    padding-left: 1em;
 }
 
 footer {

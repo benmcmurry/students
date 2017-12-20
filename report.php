@@ -49,32 +49,32 @@ mysqli_free_result($result);
     <div id='data-table'>
 
         <div class='column'>
-            <div class='value header'>Semester</div>
-            <div class='value header'>Status</div>
-            <div class='placeholder'>LATs</div>
-            <div class='value header'>LATs Combined Average</div>
-            <div class='value header'>LATs Vocabulary</div>
-            <div class='value header'>LATs Listening Score</div>
-            <div class='value header'>LATs Listening Level</div>
-            <div class='value header'>LATs Reading Score</div>
-            <div class='value header'>LATs Reading Level</div>
-            <div class='value header'>LATs Speaking</div>
-            <div class='value header'>LATs Writing</div>
-            <div class='placeholder'>Citizenship Grades</div>
-            <div class='value header'>Grammar Citizenship</div>
-            <div class='value header'>Listening & Speaking Citizenship</div>
-            <div class='value header'>Reading Citizenship</div>
-            <div class='value header'>Writing Citizenship</div>
-            <div class='placeholder'>Proficiency Grades</div>
-            <div class='value header'>Grammar Proficiency</div>
-            <div class='value header'>Listening & Speaking Proficiency</div>
-            <div class='value header'>Reading Proficiency</div>
-            <div class='value header'>Writing Proficiency</div>
-            <div class='placeholder'>5-point Scale</div>
-            <div class='value header'>Grammar 5-point Scale</div>
-            <div class='value header'>Listening & Speaking 5-point Scale</div>
-            <div class='value header'>Reading 5-point Scale</div>
-            <div class='value header'>Writing 5-point Scale</div>
+            <div class='header'>Semester</div>
+            <div class='header'>Status</div>
+            <div class='placeholderHeader'>LATs</div>
+            <div class='header'>Combined Average</div>
+            <div class='header'>Vocabulary</div>
+            <div class='header'>Listening Score</div>
+            <div class='header'>Listening Level</div>
+            <div class='header'>Reading Score</div>
+            <div class='header'>Reading Level</div>
+            <div class='header'>Speaking</div>
+            <div class='header'>Writing</div>
+            <div class='placeholderHeader'>Citizenship Grades</div>
+            <div class='header'>Grammar</div>
+            <div class='header'>Listening & Speaking</div>
+            <div class='header'>Reading</div>
+            <div class='header'>Writing</div>
+            <div class='placeholderHeader'>Proficiency Grades</div>
+            <div class='header'>Grammar</div>
+            <div class='header'>Listening & Speaking</div>
+            <div class='header'>Reading</div>
+            <div class='header'>Writing</div>
+            <div class='placeholderHeader'>5-point Scale</div>
+            <div class='header'>Grammar</div>
+            <div class='header'>Listening & Speaking</div>
+            <div class='header'>Reading</div>
+            <div class='header'>Writing</div>
         </div>
         <?php
   while ($row2 = $result2->fetch_assoc()) {
@@ -88,7 +88,8 @@ mysqli_free_result($result);
             echo "<div class='value'>".$row2['semester_name']." ".$row2['semester_year']."</div>";
           } elseif($key !== 'semester_name' && $key !=="semester_year"){
             if ($key == 'lats_comb_av'){echo "<div class='placeholder'>&nbsp;</div>";}
-          echo "<div class='value'>$value</div>";
+            if ($value=="-777") {$value = "-";}
+            echo "<div class='value'>$value</div>";
           }
         }
 
