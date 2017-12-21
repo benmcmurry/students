@@ -26,6 +26,8 @@ mysqli_free_result($result);
   $query = $elc_db->prepare("Select 
   sd.semester, 
   sd.status, 
+  sd.level,
+  sd.level_name,
   sd.lats_comb_av,
   sd.lats_vocab,
   sd.lats_listening_score,
@@ -51,6 +53,7 @@ mysqli_free_result($result);
         <div class='column'>
             <div class='header'>Semester</div>
             <div class='header'>Status</div>
+            <div class='header'>Level</div>
             <div class='placeholderHeader'>LATs</div>
             <div class='header'>Combined Average</div>
             <div class='header'>Vocabulary</div>
@@ -89,7 +92,13 @@ mysqli_free_result($result);
           } elseif($key !== 'semester_name' && $key !=="semester_year"){
             if ($key == 'lats_comb_av'){echo "<div class='placeholder'>&nbsp;</div>";}
             if ($value=="-777") {$value = "-";}
-            echo "<div class='value'>$value</div>";
+            if ($key=="level") {echo "<div class='value'>$value";}
+            elseif ($key=="level_name") {
+              if ($value==""){
+                echo "</div>";
+              } else {echo " ($value)</div>";}
+            }
+            else {echo "<div class='value'>$value</div>"; }
           }
         }
 
