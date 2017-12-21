@@ -17,11 +17,12 @@ include_once("cas-go.php");
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Martel:600,400,200' rel='stylesheet' type='text/css'>
-        <link href="style.css" rel="stylesheet" type="text/css" />
+        <link href="jquery-ui.css" rel="stylesheet" type="text/css" />
+<link href="style.css" rel="stylesheet" type="text/css" />
         <script type="text/javascript" src="js/jquery.js"></script>
         <script type="text/javascript" src="js/jquery-ui.js"></script>
         <script type="text/javascript" src="js/js.js"></script>
-
+        
     </head>
 
     <body>
@@ -48,8 +49,8 @@ include_once("cas-go.php");
             ?>
 
             <div id="search_bar">
-                student id
-                <div contenteditable="true" id='student_id'>
+                search (by name or id)
+                <div contenteditable="true" id='search'>
 
                 </div>
                 <a id='get'>Get Info</a>

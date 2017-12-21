@@ -53,13 +53,14 @@ article {
     background-color: #16357a;
 }
 
-#search_bar #student_id {
+#search_bar #search {
     display: inline-block;
     background-color: white;
     color: #16357a;
-    font-size: 1.5em;
-    line-height: 1.5em;
-    width: 7em;
+    font-size: 1em;
+    line-height: 1em;
+    width: 17em;
+    padding: .5em;
     margin: 0em 1em;
 }
 
@@ -70,7 +71,7 @@ a#get {
     cursor: pointer;
     font-size: 1em;
     line-height: 1em;
-    padding: .4em .3em .17em;
+    padding: .2em .5em .17em;
     width: 14em;
     z-index: 99;
 }
@@ -94,18 +95,19 @@ a#get:active {
 #data-table {
     display: flex;
     flex-direction: row;
-    /* align-items: flex-start; */
-    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    justify-content: center;
+    justify-content: stretch;
 }
 
 #data-table .column {
-    flex: 1;
+    flex: initial;
+    flex-grow: 0;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     margin: 0px;
+    padding: 0px;
 }
 
 #data-table .column:first-child {
